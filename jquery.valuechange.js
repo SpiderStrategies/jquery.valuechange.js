@@ -1,8 +1,4 @@
 $.event.special.valuechange = {
-  setup: function (data, namespaces) {
-    $(this).data('previous', this.contentEditable === 'true' ? $(this).html() : $(this).val())
-    $(this).bind('keyup.valuechange cut.valuechange paste.valuechange input.valuechange', $.event.special.valuechange.handler)
-  },
 
   teardown: function (namespaces) {
     $(this).unbind('.valuechange')
@@ -10,6 +6,13 @@ $.event.special.valuechange = {
 
   handler: function (e) {
     $.event.special.valuechange.triggerChanged($(this))
+  },
+
+  add: function (obj) {
+    var selector = obj.selector
+      , el = selector ? $(selector, this) : $(this)
+    el.data('previous', this.contentEditable === 'true' ? $(el).html() : $(el).val())
+    el.bind('keyup.valuechange cut.valuechange paste.valuechange input.valuechange', $.event.special.valuechange.handler)
   },
 
   triggerChanged: function (element) {
