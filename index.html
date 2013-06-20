@@ -1,0 +1,18 @@
+<html>
+  <head>
+    <script src="http://code.jquery.com/jquery-2.0.2.js"></script>
+    <script src="./jquery.valuechange.js"></script>
+    <script>
+      $(function () {
+        $('#text').on('valuechange', function (e, previous) {
+          $('#output').append('previous: ' +  previous +  '  --  current: ' + $(this).val() + '<br />')
+        })
+      })
+    </script>
+  </head>
+  <body>
+    <input id="text" type="text" />
+
+    <div id="output"></div>
+  </body>
+</html>
