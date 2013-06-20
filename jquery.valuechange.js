@@ -9,10 +9,7 @@ $.event.special.valuechange = {
   },
 
   add: function (obj) {
-    var selector = obj.selector
-      , el = selector ? $(selector, this) : $(this)
-    el.data('previous', this.contentEditable === 'true' ? $(el).html() : $(el).val())
-    el.bind('keyup.valuechange cut.valuechange paste.valuechange input.valuechange', $.event.special.valuechange.handler)
+    $(this).on('keyup.valuechange cut.valuechange paste.valuechange input.valuechange', obj.selector, $.event.special.valuechange.handler)
   },
 
   triggerChanged: function (element) {
