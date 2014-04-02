@@ -14,7 +14,8 @@ $.event.special.valuechange = {
 
   triggerChanged: function (element) {
     var current = element[0].contentEditable === 'true' ? element.html() : element.val()
-    if (current !== element.data('previous')) {
+      , previous = typeof element.data('previous') === 'undefined' ? element[0].defaultValue : element.data('previous')
+    if (current !== previous) {
       element.trigger('valuechange', [element.data('previous')])
       element.data('previous', current)
     }
